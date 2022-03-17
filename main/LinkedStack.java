@@ -115,4 +115,61 @@ public class LinkedStack<T> implements StackInterface<T> {
         } // end setNextNode
     } // end Node
 
+    // Converts an infix expression to an equivalent postfix expression. operatorStack = a new empty stack
+    private static String convertToPostFix(String infix){
+        StackInterface<Character> operatorStack = new LinkedStack<>();
+        String postfix = "";
+
+        int spot = 0;
+        int end = infix.length()-1;
+        char nextCharacter = infix.charAt(0);
+
+        while(spot <= end){
+            nextCharacter = infix.charAt(spot);
+            switch(nextCharacter){
+                case '^':
+                    operatorStack.push(nextCharacter);
+                    break;
+                case '+' : case '-' : case '*' : case '/' :
+                    while (!operatorStack.isEmpty() &&  (opPrecedence(nextCharacter) <= opPrecedence(operatorStack.peek()))){
+                        postfix += operatorStack.peek();
+                        operatorStack.pop();
+                    }
+                    operatorStack.push(nextCharacter);
+                    break;
+                case '(' :
+                    operatorStack.push(nextCharacter);
+                    break;
+                case ')' :
+                    char topOperator = operatorStack.pop();
+                    while (topOperator != '('){
+                        postfix += topOperator;
+                        topOperator = operatorStack.pop();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        while (!operatorStack.isEmpty()){
+            char topOperator = operatorStack.pop();
+            postfix += topOperator;
+        }
+        return postfix;
+
+    }
+
+    private static int opPrecedence(char operator){
+        switch (op){
+            case '+': 
+            case '-':
+                return 0;
+            case '*':
+            case '/':
+                return 1;
+            case '^':
+                return 2;
+        }
+    }
+
 }
