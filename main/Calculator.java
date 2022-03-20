@@ -29,9 +29,16 @@ public class Calculator {
         int end = infix.length() - 1;
         char nextCharacter = infix.charAt(0);
 
-        while (spot <= end) {
+        for (spot = 0; spot <= end; spot++) {
             nextCharacter = infix.charAt(spot);
             switch (nextCharacter) {
+                case 'a':
+                case 'b':
+                case 'c':
+                case 'd':
+                case 'e':
+                    operatorStack.push(nextCharacter);
+                    break;
                 case '^':
                     operatorStack.push(nextCharacter);
                     break;
@@ -60,10 +67,10 @@ public class Calculator {
                     break;
             }
         }
-        while (!operatorStack.isEmpty()) {
-            char topOperator = operatorStack.pop();
-            postfix += topOperator;
-        }
+        //while (!operatorStack.isEmpty()) {
+           // char topOperator = operatorStack.pop();
+       //     postfix += topOperator;
+        //}
         return postfix;
 
     }
@@ -178,7 +185,7 @@ public class Calculator {
 
     // main method
     public static void main(String[] args) {
-        String infix = "a*b / (c - a) + d * e";
+        String infix = "a*b/(c-a)+d*e";
         String postfix = "";
         int result = 0;
         System.out.println("Infix expression: " + infix);
