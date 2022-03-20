@@ -1,4 +1,5 @@
-package project2;
+package com.example;
+
 
 /**
  * Contains methods convertToPostfix, which converts infix expressions to
@@ -8,8 +9,10 @@ package project2;
  * @author Rebecca Glatts, Yvonne Li, Jessica Ortega
  * 
  */
-public class Calc {
+public class Calculator {
+    public Calculator() {
 
+    }
     /**
      * Converts an infix expression to an equivalent postfix expression.
      * operatorStack = a new empty stack
@@ -18,8 +21,8 @@ public class Calc {
      * @author
      * @return the postfix value converted from infix
      */
-    private static String convertToPostFix(String infix) {
-        StackInterface<Character> operatorStack = new LinkedStack<>();
+    public static String convertToPostFix(String infix) {
+        StackInterface<Character> operatorStack = new LinkedStack<Character>();
         String postfix = "";
 
         int spot = 0;
@@ -69,7 +72,7 @@ public class Calc {
      * Takes in an operator and returns the precedence of it. 0 for +, -, 1 for *,
      * /, and 2 for ^
      * 
-     * @author
+     * @author Jessica Ortega, Yvonne Li
      * @param operator the operator
      * @return the precendence of the operator
      */
@@ -95,12 +98,12 @@ public class Calc {
      * @param postfix The postfix expression to be
      * @return the value from the evaluated postfix expression
      */
-    public static String evaluatePostfix(String postfix) {
+    public static Integer evaluatePostfix(String postfix) {
         // Evaluates a postfix expression.
-        ResizeableArrayStack<String> valueStack = new ResizeableArrayStack<>();
-        Float operandOne;
-        Float operandTwo;
-        String result;
+        ResizeableArrayStack<Integer> valueStack = new ResizeableArrayStack<Integer>();
+        int operandOne;
+        int operandTwo;
+        int result;
         // for the length of the string, get each character and evaluate it
         for (int i = 0; i < postfix.length(); i++) {
             char nextCharacter = postfix.charAt(i);
@@ -109,54 +112,58 @@ public class Calc {
                 // if the character is a variable it pushes the value of the
                 // variable to the stack
                 case 'a':
-                    valueStack.push("2");
+                    
+                    valueStack.push(2);
                     break;
                 case 'b':
-                    valueStack.push("3");
+                    
+                    valueStack.push(3);
                     break;
                 case 'c':
-                    valueStack.push("4");
+                    valueStack.push(4);
                     break;
                 case 'd':
-                    valueStack.push("5");
+                    valueStack.push(5);
                     break;
                 case 'e':
-                    valueStack.push("6");
+                    valueStack.push(6);
                     break;
                 // it adds the two top operands from the stack together if the char
                 // is a +
                 case '+':
-                    operandTwo = Float.parseFloat(valueStack.pop());
-                    operandOne = Float.parseFloat(valueStack.pop());
-                    result = String.valueOf(operandOne + operandTwo);
+                    operandTwo = valueStack.pop();
+                    operandOne = valueStack.pop();
+                    result = operandOne + operandTwo;
                     valueStack.push(result);
                     break;
                 // subtracts top two operands from stack if -
                 case '-':
-                    operandTwo = Float.parseFloat(valueStack.pop());
-                    operandOne = Float.parseFloat(valueStack.pop());
-                    result = String.valueOf(operandOne - operandTwo);
+                    operandTwo = valueStack.pop();
+                    operandOne = valueStack.pop();
+                    result = operandOne - operandTwo;
                     valueStack.push(result);
                     break;
                 // multiplies top two operands from stack if *
                 case '*':
-                    operandTwo = Float.parseFloat(valueStack.pop());
-                    operandOne = Float.parseFloat(valueStack.pop());
-                    result = String.valueOf(operandOne * operandTwo);
+                    operandTwo = valueStack.pop();
+                    operandOne = valueStack.pop();
+                    result = operandOne * operandTwo;
                     valueStack.push(result);
+                    
                     break;
                 // divides top two operands from stack if /
                 case '/':
-                    operandTwo = Float.parseFloat(valueStack.pop());
-                    operandOne = Float.parseFloat(valueStack.pop());
-                    result = String.valueOf(operandOne / operandTwo);
+                operandTwo = valueStack.pop();
+                operandOne = valueStack.pop();
+                result = operandOne / operandTwo;
+            
                     valueStack.push(result);
                     break;
                 // puts the value of operandOne to the power of operandTwo if ^
                 case '^':
-                    operandTwo = Float.parseFloat(valueStack.pop());
-                    operandOne = Float.parseFloat(valueStack.pop());
-                    result = String.valueOf(Math.pow(operandOne, operandTwo));
+                    operandTwo = valueStack.pop();
+                    operandOne = valueStack.pop();
+                    result = operandOne - operandTwo;
                     valueStack.push(result);
                     break;
                 // if the character is unexpected or whitespace, it ignores it
@@ -170,12 +177,12 @@ public class Calc {
     }
 
     // main method
-    public void main() {
+    public static void main(String[] args) {
         String infix = "a*b / (c - a) + d * e";
         String postfix = "";
-        String result = "";
-        System.out.println(infix);
-        postfix = convertToPostFix("Infix expression: " + infix);
+        int result = 0;
+        System.out.println("Infix expression: " + infix);
+        postfix = convertToPostFix(infix);
         System.out.println("Postfix expression: " + postfix);
         result = evaluatePostfix(postfix);
         System.out.println("Result: " + result);
