@@ -1,7 +1,7 @@
 package com.example;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class CalculatorTest
     public void testSubtractionConvert() {
         String result = "";
         result = Calculator.convertToPostFix("b-a");
-        assertEquals(result, "ab-");
+        assertEquals(result, "ba-");
     }
 
 
@@ -50,7 +50,7 @@ public class CalculatorTest
     public void testDivisionConvert() {
         String result = "";
         result = Calculator.convertToPostFix("e/a");
-        assertEquals(result, "ab/");
+        assertEquals(result, "ea/");
     }
 
     /**
@@ -69,9 +69,9 @@ public class CalculatorTest
      */
     @Test
     public void testAdditionEvaluate() {
-        String result = "";
-        result = Calculator.convertToPostFix("ab+");
-        assertEquals(result, "5");
+        int result = 0;
+        result = Calculator.evaluatePostfix("ab+");
+        assertEquals(result, 5);
     }
 
     /**
@@ -79,9 +79,9 @@ public class CalculatorTest
      */
     @Test
     public void testSubtractionEvaluate() {
-        String result = "";
-        result = Calculator.convertToPostFix("ba-");
-        assertEquals(result, "1");
+        int result = 0;
+        result = Calculator.evaluatePostfix("ba-");
+        assertEquals(result, 1);
     }
 
     /**
@@ -89,9 +89,9 @@ public class CalculatorTest
      */
     @Test
     public void testMultiplicationEvaluate() {
-        String result = "";
-        result = Calculator.convertToPostFix("ab*");
-        assertEquals(result, "6");
+        int result = 0;
+        result = Calculator.evaluatePostfix("ab*");
+        assertEquals(result, 6);
     }
 
     /**
@@ -99,20 +99,11 @@ public class CalculatorTest
      */
     @Test
     public void testDivisionEvaluate() {
-        String result = "";
-        result = Calculator.convertToPostFix("ea/");
-        assertEquals(result, "3");
+        int result = 0;
+        result = Calculator.evaluatePostfix("ea/");
+        assertEquals(result, 3);
     }
 
-    /**
-     * Tests whether exponents is evaluated correctly in evaluatePostfix
-     */
-    @Test
-    public void testExponentsEvaluate() {
-        String result = "";
-        result = Calculator.convertToPostFix("ab^");
-        assertEquals(result, "8");
-    }
 
    
 
