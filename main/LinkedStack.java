@@ -1,43 +1,16 @@
-package project2;
+package com.example;
 
 import java.util.EmptyStackException;
 
 public class LinkedStack<T> implements StackInterface<T> {
 
-    private Node firstNode; // reference to first node
-    private int numberOfEntries;
     private Node topNode; // References the first node in the chain
 
     public LinkedStack() {
         topNode = null;
     } // end default constructor
-
+   
     /**
-     * Locates a given entry within this bag.
-     * Returns a reference to the node containing the entry, if located,
-     * or null otherwise.
-     * @author Frank M. Carrano, Timothy M. Henry
-     * @version 5.0
-     *  */ 
-    private Node getReferenceTo(T anEntry) {
-        boolean found = false;
-        Node currentNode = firstNode;
-
-        while (!found && (currentNode != null)) {
-            if (anEntry.equals(currentNode.data))
-                found = true;
-            else
-                currentNode = currentNode.next;
-        } // end while
-
-        return currentNode;
-    } // end getReferenceTo
-
-    public int getCurrentSize() {
-        return numberOfEntries;
-    } // end getCurrentSize
-
-     /**
      * Removes all entries from this bag.
      * 
      * @author Frank M. Carrano, Timothy M. Henry
@@ -74,8 +47,7 @@ public class LinkedStack<T> implements StackInterface<T> {
         return top;
     } // end pop
 
-
-      /**
+    /**
      * @author Frank M. Carrano, Timothy M. Henry
      * @version 5.0
      */
@@ -83,7 +55,6 @@ public class LinkedStack<T> implements StackInterface<T> {
         return topNode == null;
     } // end isEmpty
 
-   
     // @version 5.0 */
     private class Node {
         private T data; // Entry in bag
@@ -114,6 +85,5 @@ public class LinkedStack<T> implements StackInterface<T> {
             next = nextNode;
         } // end setNextNode
     } // end Node
-
 
 }

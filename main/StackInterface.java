@@ -1,4 +1,5 @@
-package project2;
+package com.example;
+
 
 /**
    An interface for the ADT stack.

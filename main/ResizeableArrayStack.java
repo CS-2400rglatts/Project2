@@ -1,6 +1,4 @@
-package project2;
-
-import java.util.ArrayList;
+package com.example;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
@@ -51,17 +49,6 @@ public class ResizeableArrayStack<T> implements StackInterface<T> {
                     "capacity exeeds allowed " +
                     "maximum of " + MAX_CAPACITY);
     } // end checkCapacity
-
-    /**
-     * 
-     * Doubles the size of the array bag.
-     * Precondition: checkIntegrity has been called.
-     */
-    private void doubleCapacity() {
-        int newLength = 2 * stack.length;
-        checkCapacity(newLength);
-        stack = Arrays.copyOf(stack, newLength);
-    } // end doubleCapacity
 
     private void ensureCapacity() {
         if (topIndex >= stack.length - 1) // If array is full, double its size

@@ -18,18 +18,17 @@ public class Calculator {
      * operatorStack = a new empty stack
      * 
      * @param infix the infix expression to be converted to postfix expression
-     * @author Jessica Ortega, Yvonne Li
+     * @author Jessica Ortega, Yvonne Li, Rebecca Glatts
      * @return the postfix value converted from infix
      */
     public static String convertToPostFix(String infix) {
         StackInterface<Character> operatorStack = new LinkedStack<Character>();
         String postfix = "";
-
         
         int end = infix.length() - 1;
         char nextCharacter = infix.charAt(0);
 
-        for (int spot = 0; spot < end; spot++) {
+        for (int spot = 0; spot <= end; spot++) {
             nextCharacter = infix.charAt(spot);
             switch (nextCharacter) {
                 case 'a':
@@ -78,21 +77,24 @@ public class Calculator {
     /**
      * Takes in an operator and returns the precedence of it. 0 for +, -, 1 for *,
      * /, and 2 for ^
-     * 
-     * @author Jessica Ortega, Yvonne Li
+     *
      * @param operator the operator
      * @return the precendence of the operator
+     * @author Jessica Ortega, Yvonne Li, Rebecca Glatts
      */
     private static int opPrecedence(char operator) {
         switch (operator) {
+            case '(':
+            case ')':
+                return 0;
             case '+':
             case '-':
-                return 0;
+                return 1;
             case '*':
             case '/':
-                return 1;
-            case '^':
                 return 2;
+            case '^':
+                return 3;
         }
         return operator;
     }
