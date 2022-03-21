@@ -18,18 +18,18 @@ public class Calculator {
      * operatorStack = a new empty stack
      * 
      * @param infix the infix expression to be converted to postfix expression
-     * @author
+     * @author Jessica Ortega, Yvonne Li
      * @return the postfix value converted from infix
      */
     public static String convertToPostFix(String infix) {
         StackInterface<Character> operatorStack = new LinkedStack<Character>();
         String postfix = "";
 
-        int spot = 0;
+        
         int end = infix.length() - 1;
         char nextCharacter = infix.charAt(0);
 
-        for (spot = 0; spot <= end; spot++) {
+        for (int spot = 0; spot < end; spot++) {
             nextCharacter = infix.charAt(spot);
             switch (nextCharacter) {
                 case 'a':
@@ -37,7 +37,7 @@ public class Calculator {
                 case 'c':
                 case 'd':
                 case 'e':
-                    operatorStack.push(nextCharacter);
+                    postfix += nextCharacter;
                     break;
                 case '^':
                     operatorStack.push(nextCharacter);
@@ -58,7 +58,7 @@ public class Calculator {
                     break;
                 case ')':
                     char topOperator = operatorStack.pop();
-                    while (topOperator != '(') {
+                    while (!operatorStack.isEmpty() && topOperator != '(') {
                         postfix += topOperator;
                         topOperator = operatorStack.pop();
                     }
@@ -67,10 +67,10 @@ public class Calculator {
                     break;
             }
         }
-        //while (!operatorStack.isEmpty()) {
-           // char topOperator = operatorStack.pop();
-       //     postfix += topOperator;
-        //}
+        while (!operatorStack.isEmpty()) {
+            char topOperator = operatorStack.pop();
+            postfix += topOperator;
+        }
         return postfix;
 
     }
